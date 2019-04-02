@@ -62,3 +62,25 @@ sms_classifier <- naiveBayes(sms_train, sms_raw_train$type)
 sms_test_pred <- predict(sms_classifier, sms_test)
 library(gmodels)
 CrossTable(sms_test_pred, sms_raw_test$type, prop.chisq = FALSE, prop.t = FALSE, dnn=c('predicted', 'actual'))
+
+t <- sms_classifier$tables
+counts <- length(t)
+c <- 1
+tn <- c()
+fp <- c()
+fn <- c()
+tp <- c()
+repeat {
+  avail <- t$available
+  tn <- c(tn, avail[1])
+  fp <- c(fp, avail[2])
+  fn <- c(fn, avail[3])
+  tp <- c(tp, avail[4])
+  if (c > counts) {
+    break
+  }
+  c <- c + 1
+}
+df <- data.frame(tn=tn, fp=fp, fn=fn, tp=tp)
+library(ggplot2)
+ggplot(df, aes(fp, fn,colour = class)) + geom_point()
