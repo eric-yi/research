@@ -23,4 +23,6 @@ credit_model
 summary(credit_model)
 credit_pred <- predict(credit_model, credit_test)
 library(gmodels)
-CrossTable(credit_test$,default, credit_pred, prop.chisq=FALSE, prop.c=FALSE, prop.r=FALSE, dnn=c('autual default', 'predicted default'))
+CrossTable(credit_test$default, credit_pred, 
+           prop.chisq=FALSE, prop.c=FALSE, prop.r=FALSE, 
+           dnn=c('autual default', 'predicted default'))
