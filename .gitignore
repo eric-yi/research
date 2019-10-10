@@ -154,3 +154,5 @@ vcs.xml
 .Rproj.user
 
 /dataset
+
+.DS_Store

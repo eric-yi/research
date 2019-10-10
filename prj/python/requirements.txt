@@ -6,3 +6,4 @@ log
 keras
 tensorflow
 pillow
+opencv-python
