@@ -2,8 +2,15 @@ numpy
 pytest
 sympy
 scipy
-log
 keras
 tensorflow
 pillow
 opencv-python
+pandas
+matplotlib
+seaborn
+imageio
+imgaug
+glob2
+dill
+segmentation-models

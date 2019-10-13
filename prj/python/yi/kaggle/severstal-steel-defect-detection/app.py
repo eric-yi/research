@@ -28,6 +28,7 @@ def load_train_csv():
         logging.info(f'train data header: {header_str}')
         reader = csv.DictReader(train_fd)
         n = 0
+        r = 0
         for row in reader:
             logging.info(f'train data : {row}')
             image_name = row['ImageId_ClassId'].split('_')[0]
@@ -35,9 +36,11 @@ def load_train_csv():
             logging.info(f'image path : {image_path}')
             if row['EncodedPixels'] != '':
                 n += 1
-            if n == 100:
+            if image_name == '0002cc93b.jpg':
                 detect_image(image_name, image_path, row['EncodedPixels'])
                 break
+            r += 1
+        logging.info(f'total = {r}')
 
 
 def detect_image(image_name, image_path, masks_pixels):
@@ -76,5 +79,41 @@ def detect_image(image_name, image_path, masks_pixels):
     cv2.imshow(image_name, pixels)
     cv2.waitKey(0)
 
-load_train_csv()
 
+
+def load_and_detect_data():
+    import pandas as pd
+    from glob2 import glob
+    from matplotlib import pyplot as plt
+    import matplotlib.patches as patches
+    import matplotlib
+    import seaborn as sns
+    import imageio
+
+    import imgaug as ia
+    from imgaug import augmenters as iaa
+    from imgaug.augmentables.segmaps import SegmentationMapOnImage
+    import imgaug.imgaug
+
+    TRAIN_PATH = os.path.join(dataset_path, 'train_images')
+    if not os.path.isdir(TRAIN_PATH):
+        logger.error(f'training dir not exist: {TRAIN_PATH}')
+        return
+
+    TEST_PATH = os.path.join(dataset_path, 'test_images')
+    if not os.path.isdir(TEST_PATH):
+        logger.error(f'test dir not exist: {TEST_PATH}')
+        return
+
+    train_df = pd.read_csv(os.path.join(dataset_path, 'train.csv'))
+
+    print(glob(TRAIN_PATH + '*.jpg'))
+    train_fns = sorted(glob(TRAIN_PATH + '*.jpg'))
+    test_fns = sorted(glob(TEST_PATH + '*.jpg'))
+    print(TRAIN_PATH)
+    print('There are {} images in the train set.'.format(len(train_fns)))
+    print('There are {} images in the test set.'.format(len(test_fns)))
+    train_df.head(10)
+
+load_train_csv()
+# load_and_detect_data()
