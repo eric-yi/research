@@ -15,3 +15,5 @@ glob2
 dill
 segmentation-models
 nltk
+pytesseract
+feedparser
