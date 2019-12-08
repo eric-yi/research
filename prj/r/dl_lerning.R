@@ -1,0 +1,6 @@
+x <- seq(-100, 100, 0.01)
+summary(x)
+log_simgmod <- 1 / (1 + exp(-x))
+plot(x, log_simgmod, 'l')
+softplus <- log(1 + exp(x))
+plot(x, softplus, 'l')
