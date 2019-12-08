@@ -4,3 +4,4 @@ length(steel_train)
 summary(steel_train$ImageId_ClassId)
 summary(steel_train$EncodedPixels)
 length(steel_train$ImageId_ClassId)
+

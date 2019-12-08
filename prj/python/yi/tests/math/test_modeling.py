@@ -1,7 +1,7 @@
 #!/usr/bin/evn python
 # -*- coding:utf-8 -*-
 from .test_base import TestBase
-from yi.math.modeling import Random, LeastSquare
+from yi.mathmatics.modeling import Random, LeastSquare
 
 
 class TestModeling(TestBase):
