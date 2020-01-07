@@ -11,7 +11,8 @@
         }, {
             "type": "shell",
             "label": "init",
-            "command": "mkdir build;cd build;cmake ..",
+            // "command": "mkdir build;cd build;cmake ..",
+            "command": "cmake -Bbuild",
             "group": "build"
         }, {
             "type": "shell",

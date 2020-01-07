@@ -8,7 +8,7 @@
 
 using namespace std;
 
-#define DATA_PATH "data/dresden"
+#define DATA_PATH "data"
 
 string GetFilePath(const char *filename, const char *ext)
 {
@@ -50,6 +50,7 @@ void Handle(const char *filename)
          << ", max bound:" << max_bound
          << "}" << endl;
 
+    shp_path = GetFilePath(filename, "shp");
     shp_handle = SHPOpen(shp_path.c_str(), "rb");
     if (shp_handle == nullptr)
     {
@@ -117,6 +118,7 @@ void Handle(const char *filename)
             // cout << "line: (" << p1_x << endl;
             v++;
         }
+
 
         // cout << "shape " << i << " {id:" << o_id
         //      << ", type:" << o_type
