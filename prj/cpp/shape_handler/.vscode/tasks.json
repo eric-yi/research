@@ -1,0 +1,25 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558 
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "clean",
+            "command": "rm -rf build",
+            "group": "build"
+        }, {
+            "type": "shell",
+            "label": "init",
+            // "command": "mkdir build;cd build;cmake ..",
+            "command": "cmake -Bbuild",
+            "group": "build"
+        }, {
+            "type": "shell",
+            "label": "build",
+            "command": "cmake --build build --target shape_handler --config Debug",
+            "dependsOn": ["clean", "init"],
+            "group": "build"
+        }
+    ]
+} 
