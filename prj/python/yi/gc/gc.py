@@ -5,8 +5,10 @@ import math
 import numpy as np
 import cv2
 
-dataset_dir = os.path.join('../..', 'dataset')
-test_image = os.path.join(dataset_dir, 'test.jpg')
+# dataset_dir = os.path.join('../..', 'dataset')
+# test_image = os.path.join(dataset_dir, 'test.jpg')
+print("==== Start ====")
+test_image = os.path.join('/Users/yixiaobin/Downloads', 'test.jpg')
 assert(os.path.isfile(test_image))
 
 img = cv2.imread(test_image, 0)
@@ -23,8 +25,8 @@ print(img.shape)
 #         print(image[n][m])
 #         break
 # core = np.array(list(1.0/9 for i in range(0, 9))).reshape(3, 3)
-i = 5
-core = np.ones([i, i])
+core_num = 5
+core = np.ones([core_num, core_num])
 print(core)
 
 for e in img.flat:
@@ -32,31 +34,31 @@ for e in img.flat:
     break
 
 
-def get_data_from_image(img, row, col, rows, cols):
+def get_data_from_image(img, core_num, row, col, rows, cols):
     data = []
-    for n in range(maht.ceil(-i/2.0), maht.ceil(i/2)):
-        for m in range(maht.ceil(-i/2.0), maht.ceil(i/2)):
+    for n in range(math.ceil(-core_num/2.0), math.ceil(core_num/2)):
+        for m in range(math.ceil(-core_num/2.0), math.ceil(core_num/2)):
             r = row + n
             c = col + m
             if r < 0 or r >= rows or c < 0 or c >= cols:
                 data.append(0)
             else:
                 data.append(img[r * cols + c])
-    return np.array(data).reshape(3, 3)
+    return np.array(data).reshape(core_num, core_num)
 
 
 print('==== get_data_from_image ====')
 for i in range(0, 20):
-    data = get_data_from_image(img.flat, i, i, img.shape[0], img.shape[1])
+    data = get_data_from_image(img.flat, core_num, i, i, img.shape[0], img.shape[1])
     print(data)
 
 pass
 
 
-def point_mul(img_data, core):
+def point_mul(img_data, core_num, core):
     d = 0
-    for n in range(maht.ceil(-i/2.0), maht.ceil(i/2)):
-        for m in range(maht.ceil(-i/2.0), maht.ceil(i/2)):
+    for n in range(math.ceil(-core_num/2.0), math.ceil(core_num/2)):
+        for m in range(math.ceil(-core_num/2.0), math.ceil(core_num/2)):
             d += img_data[n][m] * core[n][m]
     r = int(d / (i * i))
     if r < 0:
@@ -67,14 +69,14 @@ def point_mul(img_data, core):
 # point mul from 0 to 20
 print('==== point mul ====')
 for i in range(0, 20):
-    data = get_data_from_image(img.flat, i, i, img.shape[0], img.shape[1])
+    data = get_data_from_image(img.flat, core_num, i, i, img.shape[0], img.shape[1])
     mul = point_mul(data, core)
     print(mul)
 
 new_img = []
 for n in range(0, img.shape[0]):
     for m in range(0, img.shape[1]):
-        data = get_data_from_image(img.flat, n, m, img.shape[0], img.shape[1])
+        data = get_data_from_image(img.flat, core_num, n, m, img.shape[0], img.shape[1])
         mul = point_mul(data, core)
         new_img.append(mul)
 
