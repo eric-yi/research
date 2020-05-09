@@ -5,10 +5,10 @@ import math
 import numpy as np
 import cv2
 
-# dataset_dir = os.path.join('../..', 'dataset')
-# test_image = os.path.join(dataset_dir, 'test.jpg')
+dataset_dir = os.path.join('../..', 'dataset')
+test_image = os.path.join(dataset_dir, 'test.jpg')
 print("==== Start ====")
-test_image = os.path.join('/Users/yixiaobin/Downloads', 'test.jpg')
+# test_image = os.path.join('/Users/yixiaobin/Downloads', 'test.jpg')
 assert(os.path.isfile(test_image))
 
 img = cv2.imread(test_image, 0)
@@ -60,7 +60,7 @@ def point_mul(img_data, core_num, core):
     for n in range(math.ceil(-core_num/2.0), math.ceil(core_num/2)):
         for m in range(math.ceil(-core_num/2.0), math.ceil(core_num/2)):
             d += img_data[n][m] * core[n][m]
-    r = int(d / (i * i))
+    r = int(d / (core_num * core_num))
     if r < 0:
         print(f'==== Error: ${r} ====')
     return r
@@ -70,14 +70,14 @@ def point_mul(img_data, core_num, core):
 print('==== point mul ====')
 for i in range(0, 20):
     data = get_data_from_image(img.flat, core_num, i, i, img.shape[0], img.shape[1])
-    mul = point_mul(data, core)
+    mul = point_mul(data, core_num, core)
     print(mul)
 
 new_img = []
 for n in range(0, img.shape[0]):
     for m in range(0, img.shape[1]):
         data = get_data_from_image(img.flat, core_num, n, m, img.shape[0], img.shape[1])
-        mul = point_mul(data, core)
+        mul = point_mul(data, core_num, core)
         new_img.append(mul)
 
 new_img_mat = np.array(new_img, dtype=np.uint8).reshape(img.shape[0], img.shape[1])
