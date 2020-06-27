@@ -16,7 +16,7 @@
     {
       "label": "compile",
       "type": "shell",
-      "command": "cmake --config Debug .."
+      "command": "cmake -DCMAKE_BUILD_TYPE=Debug .."
     },
     {
       "label": "build",

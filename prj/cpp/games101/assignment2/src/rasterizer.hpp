@@ -8,6 +8,8 @@
 #include <algorithm>
 #include "global.hpp"
 #include "Triangle.hpp"
+#include <array>
+
 using namespace Eigen;
 
 namespace rst
@@ -78,6 +80,8 @@ namespace rst
         void draw_line(Eigen::Vector3f begin, Eigen::Vector3f end);
 
         void rasterize_triangle(const Triangle& t);
+        
+        // void homework_for_rasterize_triangle(const std::array<Vector4f, 3>& v);
 
         // VERTEX SHADER -> MVP -> Clipping -> /.W -> VIEWPORT -> DRAWLINE/DRAWTRI -> FRAGSHADER
 

@@ -18,3 +18,4 @@ vulkan
 nltk
 pytesseract
 feedparser
+taichi

@@ -1,30 +1,140 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "pa0",
-            "type": "cppdbg",
-            "request": "launch",
-            "program": "${workspaceRoot}/bin/Transformation",
-            "preLaunchTask": "compile",
-            "internalConsoleOptions": "openOnSessionStart",
-            "logging": {
-                "moduleLoad": false,
-                "programOutput": true,
-                "trace": false
-            },
-            "showDisplayString": false,
-            "args": [],
-            "stopAtEntry": false,
-            "cwd": "${workspaceRoot}",
-            "environment": [],
-            "externalConsole": false,
-            "osx": {
-                "MIMode": "lldb"
-            }
-        }
-    ]
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "pa0",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceRoot}/bin/Transformation",
+      "preLaunchTask": "compile",
+      "internalConsoleOptions": "openOnSessionStart",
+      "logging": {
+        "moduleLoad": false,
+        "programOutput": true,
+        "trace": false
+      },
+      "showDisplayString": false,
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${workspaceRoot}",
+      "environment": [],
+      "externalConsole": false,
+      "osx": {
+        "MIMode": "lldb"
+      }
+    },
+    {
+      "name": "Rasterizer-1",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceRoot}/bin/Rasterizer-1",
+      "preLaunchTask": "compile",
+      "internalConsoleOptions": "openOnSessionStart",
+      "logging": {
+        "moduleLoad": false,
+        "programOutput": true,
+        "trace": false
+      },
+      "showDisplayString": false,
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${workspaceRoot}",
+      "environment": [],
+      "externalConsole": false,
+      "osx": {
+        "MIMode": "lldb"
+      }
+    },
+    {
+      "name": "Rasterizer-2",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceRoot}/bin/Rasterizer-2",
+      "preLaunchTask": "compile",
+      "internalConsoleOptions": "openOnSessionStart",
+      "logging": {
+        "moduleLoad": false,
+        "programOutput": true,
+        "trace": false
+      },
+      "showDisplayString": false,
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${workspaceRoot}",
+      "environment": [],
+      "externalConsole": false,
+      "osx": {
+        "MIMode": "lldb"
+      }
+    },
+    {
+      "name": "BezierCurve",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceRoot}/bin/BezierCurve",
+      "preLaunchTask": "compile",
+      "internalConsoleOptions": "openOnSessionStart",
+      "logging": {
+        "moduleLoad": false,
+        "programOutput": true,
+        "trace": false
+      },
+      "showDisplayString": false,
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${workspaceRoot}",
+      "environment": [],
+      "externalConsole": false,
+      "osx": {
+        "MIMode": "lldb"
+      }
+    },
+    {
+      "name": "RayTracing",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceRoot}/bin/RayTracing",
+      "preLaunchTask": "compile",
+      "internalConsoleOptions": "openOnSessionStart",
+      "logging": {
+        "moduleLoad": false,
+        "programOutput": true,
+        "trace": false
+      },
+      "showDisplayString": false,
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${workspaceRoot}",
+      "environment": [],
+      "externalConsole": false,
+      "osx": {
+        "MIMode": "lldb"
+      }
+    },
+    {
+      "name": "RayTracing-6",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceRoot}/bin/RayTracing-6",
+      "preLaunchTask": "compile",
+      "internalConsoleOptions": "openOnSessionStart",
+      "logging": {
+        "moduleLoad": false,
+        "programOutput": true,
+        "trace": false
+      },
+      "showDisplayString": false,
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${workspaceRoot}",
+      "environment": [],
+      "externalConsole": false,
+      "osx": {
+        "MIMode": "lldb"
+      }
+    }
+  ]
 }

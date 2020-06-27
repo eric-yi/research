@@ -102,12 +102,78 @@ void rst::rasterizer::draw(pos_buf_id pos_buffer, ind_buf_id ind_buffer, col_buf
     }
 }
 
+
+
 //Screen space rasterization
 void rst::rasterizer::rasterize_triangle(const Triangle& t) {
-    auto v = t.toVector4();
-    
-    // TODO : Find out the bounding box of current triangle.
+    // auto v = t.toVector4();
+    const std::array<Vector4f, 3> v = t.toVector4();
+    // homework_for_rasterize_triangle(v);
+
+       // TODO : Find out the bounding box of current triangle.
     // iterate through the pixel and find if the current pixel is inside the triangle
+     auto v1 = v.data();
+    auto v2 = v.data()+1;
+    auto v3 = v.data()+2;
+
+    std::cout << "v1 x=" << v1->x() << ", y=" << v1->y() << ", z=" << v1->z() << std::endl;
+    std::cout << "v2 x=" << v2->x() << ", y=" << v2->y() << ", z=" << v2->z() << std::endl;
+    std::cout << "v3 x=" << v3->x() << ", y=" << v3->y() << ", z=" << v3->z() << std::endl;
+
+#define INFINITY std::pow(2, 10)
+
+    Eigen::Vector2f left_bottom(INFINITY, INFINITY);
+    Eigen::Vector2f right_top(-INFINITY, -INFINITY);
+        
+
+    // struct AABB {
+    //     Eigen::Vector2f left_top(Eigen::INFINITY, -Eigen::INFINITY);
+    //     Eigen::Vector2f right_bottom(-Eigen::INFINITY, Eigen::INFINITY);
+    // } aabb;
+
+    for (auto i = std::begin(v); i != std::end(v); i++) {
+        if (i->x() < left_bottom.x())   left_bottom.x() = i->x();
+        if (i->x() > right_top.x())     right_top.x() = i->x();
+        if (i->y() < left_bottom.y())   left_bottom.y() = i->y();
+        if (i->y() > right_top.y())     right_top.y() = i->y();
+    }
+
+    Eigen::Vector3f a(v1->x(), v1->y(), 1);
+    Eigen::Vector3f b(v2->x(), v2->y(), 1);
+    Eigen::Vector3f c(v3->x(), v3->y(), 1);
+    // std::cout << "==== bounding box from (" << left_bottom.x() << "," << left_bottom.y() << ") to (" << right_top.x() << "," << right_top.y() << ")" << std::endl;
+    for (float x = left_bottom.x();x < right_top.x(); x++) {
+        for (float y = left_bottom.y();y < right_top.y(); y++) {
+            Eigen::Vector3f p(x+0.5, y+0.5, 1);
+            Eigen::Vector3f ab = a - b; 
+            Eigen::Vector3f ap = a - p;
+            float abz = ab.cross(ap).z();
+
+            Eigen::Vector3f bc = b - c; 
+            Eigen::Vector3f bp = b - p;
+            float bcz = bc.cross(bp).z();
+             
+            Eigen::Vector3f ca = c - a; 
+            Eigen::Vector3f cp = c - p;
+            float caz = ca.cross(cp).z();
+            
+            if ((abz>0 && bcz>0 && caz>0) || (abz<0 && bcz<0 && caz<0)) {
+                // std::cout << "==== abz=" <<  abz << ", bcz=" << bcz << ", caz=" << caz << std::endl;
+                // std::cout << "==== in triangle: (" <<  x << ", " << y << ")" << std::endl;
+                auto[alpha, beta, gamma] = computeBarycentric2D(x, y, t.v);
+                float w_reciprocal = 1.0/(alpha / v[0].w() + beta / v[1].w() + gamma / v[2].w());
+                float z_interpolated = alpha * v[0].z() / v[0].w() + beta * v[1].z() / v[1].w() + gamma * v[2].z() / v[2].w();
+                z_interpolated *= w_reciprocal;
+                set_pixel(Vector3f(x, y, z_interpolated), t.getColor());
+            } else {
+                // std::cout << "**** not in triangle: (" <<  x << ", " << y << ")" << std::endl;
+            }
+
+            // std::cout << "==== " <<  x * (right_top.y() - left_bottom.y()) + y << " pixel" << std::endl;
+        }
+    }
+    
+   
 
     // If so, use the following code to get the interpolated z value.
     //auto[alpha, beta, gamma] = computeBarycentric2D(x, y, t.v);
@@ -117,6 +183,84 @@ void rst::rasterizer::rasterize_triangle(const Triangle& t) {
 
     // TODO : set the current pixel (use the set_pixel function) to the color of the triangle (use getColor function) if it should be painted.
 }
+
+// void rst::rasterizer::homework_for_rasterize_triangle(const std::array<Vector4f, 3>& v) {
+//     // TODO : Find out the bounding box of current triangle.
+//     // iterate through the pixel and find if the current pixel is inside the triangle
+//     auto v1 = v.data();
+//     auto v2 = v.data()+1;
+//     auto v3 = v.data()+2;
+
+//     std::cout << "v1 x=" << v1->x() << ", y=" << v1->y() << ", z=" << v1->z() << std::endl;
+//     std::cout << "v2 x=" << v2->x() << ", y=" << v2->y() << ", z=" << v2->z() << std::endl;
+//     std::cout << "v3 x=" << v3->x() << ", y=" << v3->y() << ", z=" << v3->z() << std::endl;
+
+// #define INFINITY std::pow(2, 10)
+
+//     Eigen::Vector2f left_bottom(INFINITY, INFINITY);
+//     Eigen::Vector2f right_top(-INFINITY, -INFINITY);
+        
+
+//     // struct AABB {
+//     //     Eigen::Vector2f left_top(Eigen::INFINITY, -Eigen::INFINITY);
+//     //     Eigen::Vector2f right_bottom(-Eigen::INFINITY, Eigen::INFINITY);
+//     // } aabb;
+
+//     for (auto i = std::begin(v); i != std::end(v); i++) {
+//         if (i->x() < left_bottom.x())   left_bottom.x() = i->x();
+//         if (i->x() > right_top.x())     right_top.x() = i->x();
+//         if (i->y() < left_bottom.y())   left_bottom.y() = i->y();
+//         if (i->y() > right_top.y())     right_top.y() = i->y();
+//     }
+
+//     Eigen::Vector3f a(v1->x(), v1->y(), 1);
+//     Eigen::Vector3f b(v2->x(), v2->y(), 1);
+//     Eigen::Vector3f c(v3->x(), v3->y(), 1);
+//     // std::cout << "==== bounding box from (" << left_bottom.x() << "," << left_bottom.y() << ") to (" << right_top.x() << "," << right_top.y() << ")" << std::endl;
+//     for (float x = left_bottom.x();x < right_top.x(); x++) {
+//         for (float y = left_bottom.y();y < right_top.y(); y++) {
+//             Eigen::Vector3f p(x+0.5, y+0.5, 1);
+//             Eigen::Vector3f ab = a - b; 
+//             Eigen::Vector3f ap = a - p;
+//             float abz = ab.cross(ap).z();
+
+//             Eigen::Vector3f bc = b - c; 
+//             Eigen::Vector3f bp = b - p;
+//             float bcz = bc.cross(bp).z();
+             
+//             Eigen::Vector3f ca = c - a; 
+//             Eigen::Vector3f cp = c - p;
+//             float caz = ca.cross(cp).z();
+            
+//             if ((abz>0 && bcz>0 && caz>0) || (abz<0 && bcz<0 && caz<0)) {
+//                 // std::cout << "==== abz=" <<  abz << ", bcz=" << bcz << ", caz=" << caz << std::endl;
+//                 // std::cout << "==== in triangle: (" <<  x << ", " << y << ")" << std::endl;
+//                 auto[alpha, beta, gamma] = computeBarycentric2D(x, y, t.v);
+//                 float w_reciprocal = 1.0/(alpha / v[0].w() + beta / v[1].w() + gamma / v[2].w());
+//                 float z_interpolated = alpha * v[0].z() / v[0].w() + beta * v[1].z() / v[1].w() + gamma * v[2].z() / v[2].w();
+//                 z_interpolated *= w_reciprocal;
+//                 set_pixel(Vector3f(x, y, z_interpolated), t.getColor());
+//             } else {
+//                 // std::cout << "**** not in triangle: (" <<  x << ", " << y << ")" << std::endl;
+//             }
+
+//             // std::cout << "==== " <<  x * (right_top.y() - left_bottom.y()) + y << " pixel" << std::endl;
+//         }
+//     }
+    
+   
+
+//     // If so, use the following code to get the interpolated z value.
+//     //auto[alpha, beta, gamma] = computeBarycentric2D(x, y, t.v);
+//     //float w_reciprocal = 1.0/(alpha / v[0].w() + beta / v[1].w() + gamma / v[2].w());
+//     //float z_interpolated = alpha * v[0].z() / v[0].w() + beta * v[1].z() / v[1].w() + gamma * v[2].z() / v[2].w();
+//     //z_interpolated *= w_reciprocal;
+
+//     // TODO : set the current pixel (use the set_pixel function) to the color of the triangle (use getColor function) if it should be painted.
+// }
+
+
+
 
 void rst::rasterizer::set_model(const Eigen::Matrix4f& m)
 {
