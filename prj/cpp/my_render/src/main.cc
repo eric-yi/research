@@ -1,7 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+extern "C"
+{
 #include "macos.h"
+}
 
 int main(int argc, char *argv[])
 {
@@ -14,14 +17,20 @@ int main(int argc, char *argv[])
     color.b = 120;
     while (!WindowClosed(window))
     {
-        if (color.r > 255)  color.r = 0;
-        if (color.g < 0)    color.g = 255;
-        if (color.b> 255)   color.r = 120;
-        if (color.b < 0)    color.r = 0;
+        if (color.r > 255)
+            color.r = 0;
+        if (color.g < 0)
+            color.g = 255;
+        if (color.b > 255)
+            color.r = 120;
+        if (color.b < 0)
+            color.r = 0;
         color.r++;
         color.g--;
-        if (color.b >= 120) color.b++; 
-        else                color.b--; 
+        if (color.b >= 120)
+            color.b++;
+        else
+            color.b--;
         printf("****** running, color: %d, %d, %d ******\n", color.r, color.g, color.b);
         ShowWindow(window, &color);
     }

@@ -33,6 +33,7 @@ def substep():
     n = num_particles[None]
     for i in range(n):
         v[i] *= ti.exp(-dt * damping[None]) # damping
+   
         total_force = ti.Vector(gravity) * particle_mass
         for j in range(n):
             if rest_length[i, j] != 0:
