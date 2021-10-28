@@ -1,0 +1,13 @@
+Controller,API Function,API URL,API Http Method,Service Functions
+FlowController,all,/flows,get,flowService.getall()
+FlowController,newEmployee,/flows,post,flowService.save(flow)
+FlowController,one,/flows/{id},get,flowService.get(id)
+FlowController,createFlow,/flows/test,put,flowService.createflow(id)
+FlowController,replaceEmployee,/flows/{id},put,"flowgroupService.updatebyflow(id)
+flowService.update(id)"
+FlowController,deleteEmployee,/flows/{id},delete,flowService.delete(id)
+WebsocketController,all,/websockets,get,websocketService.getall()
+WebsocketController,newEmployee,/websockets,post,websocketService.save(websocket)
+WebsocketController,one,/websockets/{id},get,websocketService.get(id)
+WebsocketController,replaceEmployee,/websockets/{id},put,websocketService.update(id)
+WebsocketController,deleteEmployee,/websockets/{id},delete,websocketService.delete(id)
