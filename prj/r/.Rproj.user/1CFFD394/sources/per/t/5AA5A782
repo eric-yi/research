@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1570634214577.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1259388852",
+    "id" : "5AA5A782",
+    "lastKnownWriteTime" : 1575792322,
+    "last_content_update" : 1575792322,
+    "path" : "~/local/workspace/research/prj/r/severstal-steel-defect-detection.R",
+    "project_path" : "severstal-steel-defect-detection.R",
+    "properties" : {
+        "cursorPosition" : "2,0",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 8,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

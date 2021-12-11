@@ -1,0 +1,38 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/yixiaobin/local/workspace/research/prj/cpp/my_render/src/macos.h
+
+/Users/yixiaobin/local/workspace/research/prj/cpp/my_render/src/macos.m
+macos.h
+/Users/yixiaobin/local/workspace/research/prj/cpp/my_render/src/macos.h
+assert.h
+-
+stdlib.h
+-
+string.h
+-
+Cocoa/Cocoa.h
+-
+mach-o/dyld.h
+-
+mach/mach_time.h
+-
+unistd.h
+-
+
+/Users/yixiaobin/local/workspace/research/prj/cpp/my_render/src/main.c
+stdio.h
+-
+stdlib.h
+-
+unistd.h
+-
+macos.h
+/Users/yixiaobin/local/workspace/research/prj/cpp/my_render/src/macos.h
+

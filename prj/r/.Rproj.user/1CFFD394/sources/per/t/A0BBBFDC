@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1556338320997.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1178605925",
+    "id" : "A0BBBFDC",
+    "lastKnownWriteTime" : 1561814726,
+    "last_content_update" : 1561814726244,
+    "path" : "~/local/workspace/research/prj/r/sms_spam.r",
+    "project_path" : "sms_spam.r",
+    "properties" : {
+        "cursorPosition" : "2,1",
+        "scrollLine" : "0"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

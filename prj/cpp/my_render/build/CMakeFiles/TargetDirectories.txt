@@ -1,0 +1,3 @@
+/Users/yixiaobin/local/workspace/research/prj/cpp/my_render/build/CMakeFiles/rebuild_cache.dir
+/Users/yixiaobin/local/workspace/research/prj/cpp/my_render/build/CMakeFiles/edit_cache.dir
+/Users/yixiaobin/local/workspace/research/prj/cpp/my_render/build/CMakeFiles/my_render.dir

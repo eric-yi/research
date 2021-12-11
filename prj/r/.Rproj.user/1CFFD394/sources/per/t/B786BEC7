@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1558688748898.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3195306881",
+    "id" : "B786BEC7",
+    "lastKnownWriteTime" : 1561908884,
+    "last_content_update" : 1561908884,
+    "path" : "~/local/workspace/research/prj/r/mushrooms.R",
+    "project_path" : "mushrooms.R",
+    "properties" : {
+        "cursorPosition" : "23,0",
+        "disableDependencyDiscovery" : "1",
+        "scrollLine" : "0"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
