@@ -5,7 +5,6 @@ import os.path
 from header import *
 import argparse
 import signal
-import json
 
 
 class ServiceStatus(Enum):
@@ -86,13 +85,14 @@ class ServiceFactory:
         self.services = [
             Service('notebook', 'jupyter lab --ip=0.0.0.0'),
         ]
+        # self.conda_home = os.path.join(os.path.expanduser('~'), 'miniconda')
+        self.conda_home = os.path.join(os.path.expanduser('~'), 'anaconda3')
 
     @property
     def exist_conda(self):
-        conda_home = os.path.join(os.path.expanduser('~'), 'miniconda')
-        if os.path.exists(conda_home):
-            logger.debug('miniconda exists')
-            conda_bin_files = list_files(os.path.join(conda_home, 'bin'))
+        if os.path.exists(self.conda_home):
+            logger.debug('conda exists')
+            conda_bin_files = list_files(os.path.join(self.conda_home, 'bin'))
             for conda_bin_file in conda_bin_files:
                 self.__setattr__(os.path.basename(
                     conda_bin_file), conda_bin_file)
@@ -107,8 +107,17 @@ class ServiceFactory:
             return
 
         if action == Action.SETUP:
+            if os.path.exists(self.conda_home):
+                os.rmdir(self.conda_home)
+            import platform
+            conda_link = 'https://repo.anaconda.com/miniconda/Miniconda3-latest-'
+            if platform.system() == 'Linux':
+                conda_link += 'Linux'   
+            else:
+                conda_link += 'MacOSX'   
+            conda_link += '-x86_64.sh'
             install_conda_scripts = (
-                'wget https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -O ~/miniconda.sh',
+                f'wget {conda_link} -O ~/miniconda.sh',
                 'bash ~/miniconda.sh -b -p $HOME/miniconda',
                 'rm -rf ~/miniconda.sh',
                 '~/miniconda/bin/conda init bash',
