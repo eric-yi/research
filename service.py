@@ -126,7 +126,6 @@ class ServiceFactory:
                 conda_libs = (
                     'jupyterlab',
                     'jupyterlab-drawio',
-                    'jupyterlab-spreadsheet',
                     'jupyterlab-variableInspector',
                     'jupyter-matplotlib',
                     'jupyterlab-plotly',
@@ -138,9 +137,9 @@ class ServiceFactory:
                               waiting=True, valued=True)
                     except Exception as e:
                         logger.warn(e)
-            shell('jupyter labextension install jupyterlab-spreadsheet',
-                  waiting=True, valued=True)
             shell('jupyter labextension install jupyter-threejs',
+                  waiting=True, valued=True)
+            shell('jupyter labextension install jupyterlab-spreadsheet',
                   waiting=True, valued=True)
 
             return

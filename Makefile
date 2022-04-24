@@ -1,6 +1,6 @@
 PY=python3
 
-start: init
+start:
 	$(PY) ./service.py start
 
 stop:
