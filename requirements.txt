@@ -1,0 +1,21 @@
+numpy
+pytest
+sympy
+scipy
+keras
+# tensorflow
+pillow
+opencv-python
+pandas
+matplotlib
+seaborn
+imageio
+imgaug
+glob2
+dill
+segmentation-models
+# vulkan
+nltk
+pytesseract
+feedparser
+# taichi
