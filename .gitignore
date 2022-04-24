@@ -50,3 +50,6 @@ dump.rdb
 
 .wekan
 /wekan
+
+*.pid
+*.log

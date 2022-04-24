@@ -130,7 +130,7 @@ class ServiceFactory:
                     'jupyterlab-variableInspector',
                     'jupyter-matplotlib',
                     'jupyterlab-plotly',
-
+                    'meshplot',
                 )
                 for conda_lib in conda_libs:
                     try:
@@ -138,6 +138,10 @@ class ServiceFactory:
                               waiting=True, valued=True)
                     except Exception as e:
                         logger.warn(e)
+            shell('jupyter labextension install jupyterlab-spreadsheet',
+                  waiting=True, valued=True)
+            shell('jupyter labextension install jupyter-threejs',
+                  waiting=True, valued=True)
 
             return
 
