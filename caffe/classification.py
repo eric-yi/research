@@ -53,24 +53,39 @@ net.blobs['data'].reshape(50,        # batch size
                           3,         # 3-channel (BGR) images
                           227, 227)  # image size is 227x227
 
-# image = caffe.io.load_image(os.path.join(caffe_root, 'examples/images/cat.jpg'))
-image = caffe.io.load_image(os.path.join(root_dir, 'data/dog.jpg'))
-# image = caffe.io.load_image(os.path.join(root_dir, 'data/whistle.jpg'))
-transformed_image = transformer.preprocess('data', image)
-
-# copy the image data into the memory allocated for the net
-net.blobs['data'].data[...] = transformed_image
-
-### perform classification
-output = net.forward()
-
-output_prob = output['prob'][0]  # the output probability vector for the first image in the batch
-
-print 'predicted class is:', output_prob.argmax()
-
-
 labels_file = os.path.join(root_dir, 'data/ilsvrc12/synset_words.txt')
 labels = np.loadtxt(labels_file, str, delimiter='\t')
 
-print '=== output label ==='
-print labels[output_prob.argmax()]
+def classficate(img_file):
+    image = caffe.io.load_image(os.path.join(root_dir, 'data', img_file))
+    transformed_image = transformer.preprocess('data', image)
+
+    # copy the image data into the memory allocated for the net
+    net.blobs['data'].data[...] = transformed_image
+
+    ### perform classification
+    output = net.forward()
+
+    output_prob = output['prob'][0]  # the output probability vector for the first image in the batch
+
+    print 'predicted class is:', output_prob.argmax()
+
+
+    print '=== output label ==='
+    print labels[output_prob.argmax()]
+
+    # sort top five predictions from softmax output
+    top_inds = output_prob.argsort()[::-1][:5]  # reverse sort and take five largest items
+
+    print '=== probabilities and labels ==='
+    for i, label in zip(output_prob[top_inds], labels[top_inds]):
+        print i, label
+
+print '*********** cat ***********' 
+classficate('cat.jpg')
+print '*********** dog ***********' 
+classficate('dog.jpg')
+print '*********** whistle ***********'
+classficate('whistle.jpg')
+print '*********** fish bike ***********' 
+classficate('fish-bike.jpg')
