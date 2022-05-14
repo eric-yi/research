@@ -19,3 +19,5 @@ nltk
 pytesseract
 feedparser
 # taichi
+lmdb
+protobuf

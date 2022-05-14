@@ -3,7 +3,7 @@
 # depending on the value assigned to $BACKEND.
 set -e
 
-EXAMPLE=examples/mnist
+EXAMPLE=mnist
 DATA=data/mnist
 
 mkdir -p $EXAMPLE
