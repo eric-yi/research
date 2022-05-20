@@ -210,6 +210,11 @@ def train():
         )
 
 
+def lenet5():
+    training_images, test_images, training_labels, test_labels = prehandle()
+    logger.debug(training_images[0].shape)
+
+
 class MnistLecunUnitTests(UnitTests):
     def __init__(self):
         super().__init__(__file__)
@@ -224,9 +229,13 @@ class MnistLecunUnitTests(UnitTests):
         prehandle()
         
         
-    # @UnitTests.skip
+    @UnitTests.skip
     def train_test(self):
         train()
+
+    # @UnitTests.skip
+    def lenet5_test(self):
+        lenet5()
       
 MnistLecunUnitTests().run()
 
